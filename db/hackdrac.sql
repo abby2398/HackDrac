@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 01:15 PM
+-- Generation Time: Oct 11, 2024 at 11:32 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -46,29 +46,6 @@ INSERT INTO `contact_queries` (`id`, `Name`, `Email`, `Message`, `created_at`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblstd`
---
-
-CREATE TABLE `tblstd` (
-  `Student_id` int(100) NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `Class` varchar(1) NOT NULL,
-  `Age` int(2) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `ProfileImage` varchar(255) DEFAULT 'images/default.jpg',
-  `session_id` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tblstd`
---
-
-INSERT INTO `tblstd` (`Student_id`, `username`, `Class`, `Age`, `Password`, `ProfileImage`, `session_id`) VALUES
-(1, 'admin', 'B', 25, 'admin123', 'images/uploads/654373ba9d9bd_360_F_475009987_zwsk4c77x3cTpcI3W1C1LU4pOSyPKaqi.jpg', 'g1c1de44p4o9rcs61c2bjqrpnq');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `uploaded_images`
 --
 
@@ -93,6 +70,29 @@ INSERT INTO `uploaded_images` (`image_id`, `image_path`) VALUES
 (27, 'images/uploads/65438e8da3e8b_new xs.svg'),
 (28, 'images/uploads/65705688316b5_IMG_4244.jpeg');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(100) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `Password` varchar(100) NOT NULL,
+  `ProfileImage` varchar(255) DEFAULT 'images/default.jpg',
+  `session_id` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `Password`, `ProfileImage`, `session_id`, `email`) VALUES
+(1, 'admin', 'admin123', 'images/uploads/admin.jpg', 'fn0sre60k8tnmobn2rpeifoc0e', 'admin@hackdrac.com'),
+(23, 'abdullah', 'abdullah', 'images/default.jpg', NULL, 'abdullah@gmail.com');
+
 --
 -- Indexes for dumped tables
 --
@@ -104,16 +104,16 @@ ALTER TABLE `contact_queries`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblstd`
---
-ALTER TABLE `tblstd`
-  ADD PRIMARY KEY (`Student_id`);
-
---
 -- Indexes for table `uploaded_images`
 --
 ALTER TABLE `uploaded_images`
   ADD PRIMARY KEY (`image_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -126,16 +126,16 @@ ALTER TABLE `contact_queries`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
 
 --
--- AUTO_INCREMENT for table `tblstd`
---
-ALTER TABLE `tblstd`
-  MODIFY `Student_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
 -- AUTO_INCREMENT for table `uploaded_images`
 --
 ALTER TABLE `uploaded_images`
   MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
