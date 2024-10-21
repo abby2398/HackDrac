@@ -67,7 +67,7 @@ mysqli_close($conn);
     <div class="container">
     <form method="POST" action="">
         <label for="new_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required>
+        <input type="text" id="new_password" name="new_password" required>
         <input type="submit" value="Reset Password">
     </form>
     </div>    

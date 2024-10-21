@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2024 at 11:32 AM
+-- Generation Time: Oct 21, 2024 at 01:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phpproject`
+-- Database: `hackdrac`
 --
 
 -- --------------------------------------------------------
@@ -40,8 +40,29 @@ CREATE TABLE `contact_queries` (
 --
 
 INSERT INTO `contact_queries` (`id`, `Name`, `Email`, `Message`, `created_at`) VALUES
-(582, 'demo', 'demo@demo.com', 'demo', '2023-10-19 12:19:06'),
-(714, 'dsacc', 'ram@gmail.com', 'afaffadwd', '2023-11-03 06:41:07');
+(582, 'demo', 'user1@gmail.com', 'unable to login to my account.', '2024-10-21 10:31:41'),
+(714, 'dsacc', 'user1@gmail.com', 'unable to change my password', '2024-10-21 10:31:51'),
+(717, 'test', 'test@test.com', 'unable to register my account', '2024-10-21 10:32:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `message_id` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`message_id`, `message`, `created_at`, `user_id`) VALUES
+(1, 'My first note.\r\nLets try to change the note of another user by IDOR vulnerability.', '2024-10-21 15:31:32', 2);
 
 -- --------------------------------------------------------
 
@@ -90,8 +111,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `Password`, `ProfileImage`, `session_id`, `email`) VALUES
-(1, 'admin', 'admin123', 'images/uploads/admin.jpg', 'fn0sre60k8tnmobn2rpeifoc0e', 'admin@hackdrac.com'),
-(23, 'abdullah', 'abdullah', 'images/default.jpg', NULL, 'abdullah@gmail.com');
+(1, 'admin', 'admin123', 'images/default.jpg', NULL, 'admin@hackdrac.com'),
+(2, 'user1', '1234', 'images/uploads/user-avatar.png', 'sjmdrm5v2kiqe39t2r8p2kavod', 'user1@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -102,6 +123,13 @@ INSERT INTO `users` (`id`, `username`, `Password`, `ProfileImage`, `session_id`,
 --
 ALTER TABLE `contact_queries`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `uploaded_images`
@@ -123,7 +151,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contact_queries`
 --
 ALTER TABLE `contact_queries`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=715;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=719;
+
+--
+-- AUTO_INCREMENT for table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `uploaded_images`
@@ -135,7 +169,17 @@ ALTER TABLE `uploaded_images`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `notes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

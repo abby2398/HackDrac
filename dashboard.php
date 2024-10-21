@@ -2,19 +2,30 @@
 session_start();
 require_once("config.php");
 
-// Check if the user is dashboard
+// Check if the user is logged in
 if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     header("Location: login.php");
     exit;
 }
 
-
-/// Get the username and email from the session
+// Get the username and email from the session
 $username = isset($_SESSION["username"]) ? $_SESSION["username"] : "User"; // Fallback to 'User' if not set
 $email = $_SESSION["email"];
+$id = $_SESSION["id"];
 
+// Check if a user ID is provided in the URL, if not use the logged-in user's ID
+$user_id = isset($_GET['user_id']) ? $_GET['user_id'] : $id;
+
+// Vulnerable: No validation on user_id, allowing IDOR
+$viewNotesQuery = "SELECT * FROM notes WHERE user_id = '$user_id' ORDER BY created_at ASC"; 
+$result = mysqli_query($conn, $viewNotesQuery);
+$notesArray = [];
+
+// Fetch all results into the array
+while ($row = mysqli_fetch_assoc($result)) {
+    $notesArray[] = $row; // Append each row to the notesArray
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +35,7 @@ $email = $_SESSION["email"];
     <title>Dashboard Page</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/notes.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -53,16 +65,56 @@ $email = $_SESSION["email"];
     } ?>
     </div>
 
-    <div class="right-bar">
-        <a href="edit-profile" class="profile-link">Edit Profile</a>
-        <form action="logout" method="post" class="logout-form">
-        <input type="submit" class="logout-button" value="Logout">
+        <div class="right-bar">
+            <a href="edit-profile" class="profile-link">Edit Profile</a>
+            <form action="logout" method="post" class="logout-form">
+                <input type="submit" class="logout-button" value="Logout">
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h2>Your Notes</h2>
+        <form method="post" action="notes.php">
+            <textarea name="message" class="note-form" cols="50" rows="20" required></textarea><br>
+            <input type="submit" class="submit-btn" value="Submit" />
         </form>
     </div>
-</div>
-  
 
-    <?php include_once 'footer.php'; ?>
+    <div>
+        <h2>My Notes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                if (!empty($notesArray)) {
+                    foreach ($notesArray as $note) {
+                        echo '<tr>';
+                        echo '<td>' . $note['message'] . '</td>'; // Output message, escaped for safety
+                        echo '<td>' . $note['created_at'] . '</td>'; // Output created_at, escaped for safety
+                        echo '<td>';
+                        echo '<a href="edit-note.php?note_id=' . $note['message_id'] . '&user_id=' . $user_id . '" class="edit-btn">Edit</a>';
+                        echo '<form method="POST" action="delete-note.php" style="display:inline;">
+                                <input type="hidden" name="note_id" value="' . $note['message_id'] . '">
+                                <button type="submit" class="delete-btn">Delete</button>
+                              </form>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="3">No notes found.</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
     
+    <?php include_once 'footer.php'; ?>
 </body>
 </html>

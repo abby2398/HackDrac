@@ -11,9 +11,9 @@
     <h1>Sign in here</h1>
     <form class="form" action="login.php" method="post">
         <label>Email</label><br>
-        <input type="hidden" name="email" required><br><br>
+        <input type="email" name="email" required><br><br>
         <label>Password</label><br>
-        <input type="hidden" name="password" required><br><br>
+        <input type="password" name="password" required><br><br>
         <button type="submit" name="submitbtn" value="login">Sign in</button>
         <p>Don't have an account? <a href="registration" class="link-danger">Register</a></p>
         <p><a href="forget">Forget password</a></p>
@@ -28,7 +28,7 @@ session_start();
 require_once("config.php");
 
 // Check if the user is already authenticated
-if (isset($_SESSION["dashboard"]) && $_SESSION["dashboard"] === true) {
+if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] === true) {
     header("Location: dashboard.php"); // Redirect to dashboard page
     exit; // Make sure to exit after the redirect
 }
@@ -37,7 +37,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $nm = $_POST['email'];
     $pwd = $_POST['password'];
 
-    // Check if the email exists
+    // Vulnerable to SQL Injection
     $emailCheckQuery = "SELECT username, id, Password FROM users WHERE email = '$nm'";
     $result = mysqli_query($conn, $emailCheckQuery);
     
@@ -51,7 +51,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     if (mysqli_num_rows($result) > 0) {
         // Email exists, now check the password
         $user = mysqli_fetch_array($result);
-        if ($user['Password'] === $pwd) { // Check if the password matches
+        if ($user['Password'] === $pwd) { // Vulnerable to timing attacks
             // After successful login, set session ID
             $session_id = session_id();
             $update_query = "UPDATE users SET session_id = '$session_id' WHERE email = '$nm'";
@@ -70,7 +70,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     exit;
                 }
 
-                header("Location: dashboard");
+                // Redirect to dashboard with user ID in the URL (vulnerable to IDOR)
+                header("Location: dashboard.php?user_id=" . $_SESSION['id']); 
                 exit;
             } else {
                 // Failed to update session ID

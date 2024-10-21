@@ -6,20 +6,21 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     header("Location: login.php");
     exit;
 }
+if (isset($_FILES["profileImage"]) && $_FILES["profileImage"]["error"] == UPLOAD_ERR_OK) {
+    $email = $_SESSION["email"];
+    $uploadDir = "images/uploads/";
+    $uniqueFilename =  $_FILES["profileImage"]["name"];
+    $uploadPath = $uploadDir . $uniqueFilename;
 
-// // Check if a new username is being submitted
-// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"])) {
-//     // Directly using user input without sanitization or validation
-//     $newUsername = $_POST["username"];
+    if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $uploadPath)) {
+        
+        $updateSql = "UPDATE users SET ProfileImage = '$uploadPath' WHERE email = '$email'";
+        mysqli_query($conn, $updateSql);
+        echo "<script>alert('Your profile picture was uploaded.');</script>";
+        echo "<script>window.location.href = 'dashboard.php';</script>";
+    }
+}
 
-//     // Update the username in the database (vulnerable to SQL injection)
-//     $updateUsernameQuery = "UPDATE users SET username = '$newUsername' WHERE email = '" . $_SESSION['email'] . "'";
-//     mysqli_query($conn, $updateUsernameQuery);
-    
-//     // For SSTI vulnerability demonstration
-//     //echo "<script>alert('Your username has been updated to: $newUsername');</script>";
-//     echo "<h3>Your username has been updated to: {{ '$newUsername' }}</h3>";
-// }
 $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'dashboard.php';
 
 mysqli_close($conn);
@@ -34,6 +35,7 @@ mysqli_close($conn);
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/edit-profile.css"> 
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 </head>
 <body>
 <nav>
@@ -43,10 +45,15 @@ mysqli_close($conn);
     </nav>
     
     <div>
-    <a href="<?php echo $referrer; ?>"><h4 class="back-btn">Go back</h4></a>
+    
     <h2>Update Profile</h2>
     </div>
-
+    <div class="right-bar">
+    <a href="<?php echo $referrer; ?>"><h4 class="back-btn">Go back</h4></a>
+        <form action="logout" method="post" class="logout-form">
+        <input type="submit" class="logout-button" value="Logout">
+        </form>
+    </div>
     <!-- ------------------------*******Change Password*************------------------------ -->
     <div class="container">
         <form method="POST" action="change-password.php" class="form-pass">
@@ -76,7 +83,7 @@ mysqli_close($conn);
 
     <!-- ------------------------**********Upload profile**********------------------------ -->
     <div class="container">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form action="edit-profile.php" method="post" enctype="multipart/form-data">
         <label for="profileImage">Upload Profile Picture:</label>
         <input type="file" id="profileImage" name="profileImage" accept="image/*">
         <br>

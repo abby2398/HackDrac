@@ -21,7 +21,9 @@
         <label>Confirm Password</label><br>
         <input name="confirm_password" type="password" placeholder="Confirm your Password" required><br><br>
         <button type="submit" value="submit">Register</button><br><br>
+        <p>Already have an account? <a href="login.php" class="link-danger">Login</a></p>
     </form>
+    
 </div>
 </body>
 <?php include_once 'footer.php'; ?>

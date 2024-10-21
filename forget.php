@@ -13,6 +13,8 @@
             <label>Email</label><br>
             <input type="text" name="email"><br><br>
             <button type="submit" name="submitbtn" value="login">Reset Password</button>
+            <p>Don't have an account? <a href="registration" class="link-danger">Register</a></p>
+        <p><a href="login.php">Login</a></p>
         </form>    
     </div>
     <?php include_once 'footer.php'; ?>
