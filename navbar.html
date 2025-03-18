@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <style>
+        /* Style the navbar */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between; /* To space items */
+            align-items: center; /* Vertically center items */
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav img {
+            width: 60px; /* Adjust the size of the image */
+            height: auto;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: blueviolet;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <nav>
+        <div class="logo">
+            <a href="index.php">
+                <img src="/images/navbar.png" alt="Logo" onclick="window.location.href='index.php'">
+            </a>
+        </div>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <a href="contact.php">Contact</a>
+            <a href="about.php">About Us</a>
+        </div>
+    </nav>
+</body>
+</html>
+
