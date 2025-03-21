@@ -1,8 +1,8 @@
-# phpproject
+# Hackdrac
 It is a Vulnerable Website to start learning hacking.
 
 Step 1: Download xampp from here -> https://www.apachefriends.org/download.html  
-Step 2: Clone the project by using the command -> git clone https://github.com/abby2398/phpproject  
+Step 2: Clone the project by using the command -> git clone https://github.com/abby2398/hackdrac  
 Step 3: Copy the folder to "C:\xampp\htdocs\" and delete all other files before copying  
 Step 4: Startup your xampp and start your "Apache" and "Mysql"  
 Step 5: Open browser and type localhost/phpmyadmin in the url and hit enter  
