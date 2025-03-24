@@ -23,6 +23,8 @@ if (isset($_GET['note_id'])) {
     exit;
 }
 
+$id = $_SESSION["id"];
+
 // Handle the form submission for updating the note
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['message'])) {
@@ -34,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Vulnerability: Lack of error handling
         echo '<p class="success-message">Your note has been updated successfully!</p>';
-        header("Location: dashboard.php"); // Redirect to notes page after update
+        header("Location: dashboard.php?id=$id"); // Redirect to notes page after update
         exit;
     }
 }

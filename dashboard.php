@@ -15,6 +15,10 @@ $id = $_SESSION["id"];
 
 // Check if a user ID is provided in the URL, if not use the logged-in user's ID
 $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : $id;
+if($user_id == 1){
+    header("Location: /admin/admin.php");
+}
+
 
 // Vulnerable: No validation on user_id, allowing IDOR
 $viewNotesQuery = "SELECT * FROM notes WHERE user_id = '$user_id' ORDER BY created_at ASC"; 

@@ -7,6 +7,7 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     header("Location: login.php");
     exit;
 }
+$id = $_SESSION["id"];
 
 // Check if note_id is provided in the POST request
 if (isset($_POST['note_id'])) {
@@ -27,6 +28,6 @@ if (isset($_POST['note_id'])) {
 }
 
 // Redirect back to notes page after deletion
-header("Location: dashboard.php");
+header("Location: dashboard.php?id=$id");
 exit;
 ?>
