@@ -1,0 +1,38 @@
+echo "Congratulations! You have found the flag1 by yourself Your secret code is --"Hasta"--. Now you have to find the ubuntu user flag." > flag.txt
+
+R0(k@ndroll
+
+export HOME="/home/ubuntu"
+export ubuntu="R0(k@ndroll"
+
+
+echo "Not bad. You found the flag2 also, well that was easy i guess your secret code is --"Costa"--. Lets see if you can find the root flag. So there was a data breach in 000webhosting in 2015 where 13.5 million records were exposed to the hackers. So now you need to find the password of the root user in that breach. For email id you should go back to the hackdrac website." > flag2.txt
+
+There was a data breach in 000webhosting in 2015 where 13.5 million records were exposed to the hackers. So now you need to find the password of the root user in that breach.
+
+
+
+admin@gmail.com
+
+The password is stored on a website which is hosted somewhere else. You need to figure out a way to find the pssword, there was a breach in the application where the hackers swept all the email/password and sold it on the blackmarket.
+
+root:WJgqseTEzNAq9kKk
+
+
+echo "Congratulations! You secret code is --"Viesta"--." > root.txt
+
+sudo nano /etc/pam.d/sudo
+added this line
+auth required pam_listfile.so item=user sense=deny file=/etc/sudoers.d/blocked_users onerr=fail
+
+Created this file to explicitly bloack sudo from ubuntu
+sudo nano /etc/sudoers.d/blocked_users
+ubuntu
+
+
+WebUser@123
+
+To check whether the cron is running or not.
+crontab -l
+this is for checking logs
+cat /var/log/db_reset.log

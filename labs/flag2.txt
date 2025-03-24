@@ -1,0 +1,1 @@
+Not bad. You found the flag2 also, well that was easy i guess your secret code is --Costa--. Lets see if you can find the root flag. So there was a data breach in 000webhosting in 2015 where 13.5 million records were exposed to the hackers. So now you need to find the password of the root user in that breach. For email id you should go back to the hackdrac website.
