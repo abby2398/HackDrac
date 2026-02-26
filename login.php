@@ -100,9 +100,9 @@ $seo = [
     <h1>Sign in here</h1>
     <form class="form" action="login.php" method="post">
         <label>Email</label><br>
-        <input type="text" name="email" required><br><br>
+        <input type="hidden" name="email" required><br><br>
         <label>Password</label><br>
-        <input type="text" name="password" required><br><br>
+        <input type="hidden" name="password" required><br><br>
         <button type="submit" name="submitbtn" value="login">Sign in</button>
         <p>Don't have an account? <a href="registration.php" class="link-danger">Register</a></p>
         <p><a href="forget.php">Forget password</a></p>
