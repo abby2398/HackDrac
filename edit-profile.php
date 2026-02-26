@@ -1,4 +1,5 @@
 <?php
+include 'seo.php';
 session_start();
 require_once("config.php");
 
@@ -31,6 +32,20 @@ mysqli_close($conn);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
@@ -93,14 +108,14 @@ mysqli_close($conn);
     </form>
     </div>
 <!-- ------------------------***********update username*********------------------------ -->
-    <!-- <div class="container">
+    <div class="container">
     <form action="edit-profile.php" method="post">
         <label>Update username</label>
         <input type="text" name="username" style = "margin-left: 80px"/>
         <br>
         <input type="submit" value="Update username" style = "margin-top: 10px">
     </form>
-    </div> -->
+    </div>
     <?php include_once 'footer.php'; ?>
 </body>
 </html>

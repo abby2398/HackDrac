@@ -1,6 +1,26 @@
+<?php
+$seo = [
+  "title" => "Register | HackDrac Cybersecurity Platform",
+  "description" => "Create your HackDrac account to access cybersecurity learning resources and hands-on labs.",
+  "keywords" => "hackdrac register, cybersecurity learning",
+  "url" => "https://hackdrac.in/registration"
+];
+?>
 <!DOCTYPE html>
 <html>
 <head>
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+
     <title>Registration Page</title>
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">

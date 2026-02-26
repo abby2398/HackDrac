@@ -82,6 +82,7 @@ $userResult = mysqli_query($conn, $userQuery);
                 <form action="../logout.php" method="post" class="logout-form">
                 <input type="submit" class="logout-button" value="Logout">
                 </form>
+                <a href="SOC_admin_Dashboard.php" class="profile-link">SOC</a>
             </div>
         </div>
     <div> 

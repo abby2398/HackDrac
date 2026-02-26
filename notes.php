@@ -17,7 +17,8 @@ if(isset($_POST['message'])){
         if ($conn->query($createNote) === TRUE) {
             echo "<script>alert('Your message has been saved successfully!');</script>";
             // After successfully processing the form data and inserting into the database
-            echo "<script>window.location.href = 'dashboard.php';</script>";
+            echo "<script>window.location.href = 'dashboard.php?user_id=" . $_SESSION['id'] . "';</script>";
+
             exit;
         } else {
             echo '<p class="error-message">Error: ' . $conn->error . '</p>';

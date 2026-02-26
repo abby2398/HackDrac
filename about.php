@@ -1,6 +1,26 @@
+<?php
+$seo = [
+  "title" => "About HackDrac | Cybersecurity Research & Learning Platform",
+  "description" => "Learn about HackDrac, a cybersecurity research and learning platform focused on ethical hacking, vulnerabilities, and hands-on security labs.",
+  "keywords" => "about hackdrac, cybersecurity researcher, ethical hacking platform",
+  "url" => "https://hackdrac.in/about"
+];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HackDrac - Vulnerable Application</title>
@@ -8,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="/css/about.css">
 </head>
 <body>
+    
     <?php include_once 'navbar.html'; ?>
     <!-- Modal -->
     <div id="myModal" class="modal">
@@ -26,7 +47,7 @@
     <!-- Your existing HTML content -->
     <section id="about">
         <div class="container">
-            <h2>About HackDrac</h2>
+            <h1>About HackDrac</h1>
             <p>"HackDrac is a beginner-friendly vulnerable application designed as a hands-on learning platform for cybersecurity enthusiasts. 
                 Explore various vulnerabilities in a safe environment, empowering newcomers to delve into the world of ethical hacking. 
                 With a range of simulated vulnerabilities, HackDrac offers a practical playground for enthusiasts to learn and sharpen 

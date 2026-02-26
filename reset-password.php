@@ -19,15 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $randomToken = bin2hex(random_bytes(16)); // Generates a random 32-character hex string
 
         // Send password reset link using the Host header directly
-        $resetLink = "http://" . $_SERVER['HTTP_HOST'] . "/reset-password-confirm.php?id=" . $userId. "&token=" . $randomToken;
+        $resetLink = "https://" . $_SERVER['HTTP_HOST'] . "/reset-password-confirm.php?id=" . $userId. "&token=" . $randomToken;
         $subject = "Password Reset Request";
         $message = "Click the following link to reset your password: $resetLink";
-        $headers = "From: noreply@yourwebsite.com";
+        $headers = "From: noreply@hackdrac.com";
 
 
         // use this html because no mail server has been setup yet--------------*********------------
-        echo "Since there is no SMTP configured on your server, the reset password link is shown below.<br>THIS IS NOT A VULNERABILITY!<br>";
-        print_r($resetLink);
+        echo "Since there is no SMTP configured on the server, the reset password link is shown below.<br>THIS IS NOT A VULNERABILITY!<br>";
+        //print_r($resetLink);
+        echo '<a href="' . $resetLink . '" target="_blank">' . $resetLink . '</a>';
         die;
         //--------------*********--------------------------*********------------
 

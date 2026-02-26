@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->writeHTML($html, true, false, true, false, '');
 
     // Define the output file path dynamically in the pdfs directory
-    $outputFilePath =  '/../pdfs/notes_data_' . $document_id . '.pdf'; // Adjusted to navigate to the project root
+    $outputFilePath =  '/pdfs/notes_data_' . $document_id . '.pdf'; // Adjusted to navigate to the project root
 
     // Ensure the 'pdfs' directory exists
     if (!file_exists(dirname($outputFilePath))) {

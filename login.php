@@ -1,28 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sign in</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-</head>
-<body>
-<?php include_once 'navbar.html'; ?>
-<div class="container">
-    <h1>Sign in here</h1>
-    <form class="form" action="login.php" method="post">
-        <label>Email</label><br>
-        <input type="text" name="email" required><br><br>
-        <label>Password</label><br>
-        <input type="text" name="password" required><br><br>
-        <button type="submit" name="submitbtn" value="login">Sign in</button>
-        <p>Don't have an account? <a href="registration.php" class="link-danger">Register</a></p>
-        <p><a href="forget.php">Forget password</a></p>
-    </form>    
-</div>
-<?php include_once 'footer.php'; ?>
-</body>
-</html>
-
 <?php 
 session_start();
 require_once("config.php");
@@ -91,4 +66,50 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 }
 
 mysqli_close($conn);
+
+$seo = [
+  "title" => "Login | HackDrac Cybersecurity Platform",
+  "description" => "Login to your HackDrac account to access cybersecurity labs, notes, and vulnerability research.",
+  "keywords" => "hackdrac login, cybersecurity platform login",
+  "url" => "https://hackdrac.in/login"
+];
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+
+    <!-- <title>Sign in</title> -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<?php include_once 'navbar.html'; ?>
+<div class="container">
+    <h1>Sign in here</h1>
+    <form class="form" action="login.php" method="post">
+        <label>Email</label><br>
+        <input type="text" name="email" required><br><br>
+        <label>Password</label><br>
+        <input type="text" name="password" required><br><br>
+        <button type="submit" name="submitbtn" value="login">Sign in</button>
+        <p>Don't have an account? <a href="registration.php" class="link-danger">Register</a></p>
+        <p><a href="forget.php">Forget password</a></p>
+    </form>    
+</div>
+<?php include_once 'footer.php'; ?>
+</body>
+</html>
+
+

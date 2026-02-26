@@ -1,4 +1,5 @@
 <?php
+include 'seo.php';
 session_start();
 require_once("config.php");
 
@@ -34,6 +35,19 @@ while ($row = mysqli_fetch_assoc($result)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="robots" content="noindex, nofollow">
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Page</title>
@@ -65,7 +79,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div class="dashboard">
         <h1>Welcome back, <?php echo $username; ?></h1>   <!--  htmlspecialchars($username) for removing special chars -->
         <?php   if (!empty($profileImagePath)) {
-        echo "<img src='$profileImagePath' alt='Profile Picture' class='profile-picture'>";
+        echo "<img src='$profileImagePath' alt='Profile Picture' class='profile-picture' >";
     } ?>
     </div>
 

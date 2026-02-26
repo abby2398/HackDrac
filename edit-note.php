@@ -1,4 +1,12 @@
 <?php
+$seo = [
+  "title" => "Cybersecurity Notes & Writeups | HackDrac",
+  "description" => "Read cybersecurity notes, pentesting writeups, and vulnerability analysis based on real-world attack scenarios.",
+  "keywords" => "pentesting notes, bug bounty writeups, security research",
+  "url" => "https://hackdrac.in/notes"
+];
+?>
+<?php
 session_start();
 require_once("config.php"); // Include your database connection
 
@@ -45,6 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <title><?= $seo['title']; ?></title>
+
+    <meta name="description" content="<?= $seo['description']; ?>">
+    <meta name="keywords" content="<?= $seo['keywords']; ?>">
+
+    <link rel="canonical" href="<?= $seo['url']; ?>">
+
+    <meta property="og:title" content="<?= $seo['title']; ?>">
+    <meta property="og:description" content="<?= $seo['description']; ?>">
+    <meta property="og:url" content="<?= $seo['url']; ?>">
+    <meta property="og:type" content="website">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Note</title>
