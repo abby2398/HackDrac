@@ -8,6 +8,24 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     exit;
 }
 $id = $_SESSION["id"];
+// Update username
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username'])) {
+    $username = $_POST['username'];
+    $email = $_SESSION['email'];
+
+    // Intentionally vulnerable to SQL Injection for HackDrac training
+    $updateSql = "UPDATE users SET username = '$username' WHERE email = '$email'";
+
+    if (mysqli_query($conn, $updateSql)) {
+        $_SESSION['username'] = $username;
+
+        echo "<script>alert('Username updated successfully.');</script>";
+	echo "<script>window.location.href = 'dashboard.php?user_id=" . $_SESSION['id'] . "';</script>";
+	exit;
+    } else {
+        echo "<script>alert('Failed to update username.');</script>";
+    }
+}
 
 if (isset($_FILES["profileImage"]) && $_FILES["profileImage"]["error"] == UPLOAD_ERR_OK) {
     $email = $_SESSION["email"];
@@ -32,7 +50,15 @@ mysqli_close($conn);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C70Y2LNZ2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-9C70Y2LNZ2');
+    </script>
     <title><?= $seo['title']; ?></title>
 
     <meta name="description" content="<?= $seo['description']; ?>">
@@ -68,6 +94,7 @@ mysqli_close($conn);
     <div class="right-bar">
     <a href="<?php echo $referrer; ?>"><h4 class="back-btn">Go back</h4></a>
         <form action="logout.php" method="post" class="logout-form">
+	<input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
         <input type="submit" class="logout-button" value="Logout">
         </form>
     </div>

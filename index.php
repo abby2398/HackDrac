@@ -9,6 +9,15 @@ $seo = [
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C70Y2LNZ2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9C70Y2LNZ2');
+    </script>
     <meta charset="UTF-8">
 
     <title><?= $seo['title']; ?></title>
@@ -20,6 +29,7 @@ $seo = [
 
     <link rel="canonical" href="<?= $seo['url']; ?>">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
 
     <!-- Open Graph -->
     <meta property="og:title" content="<?= $seo['title']; ?>">

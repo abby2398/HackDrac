@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/xml; charset=UTF-8");
 
-$baseUrl = "https://hackdrac.in";
+$baseUrl = "https://hackdrac.abbytes.in";
 
 /*
  ONLY public pages

@@ -35,6 +35,15 @@ while ($row = mysqli_fetch_assoc($result)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C70Y2LNZ2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9C70Y2LNZ2');
+    </script>
     <meta name="robots" content="noindex, nofollow">
     <title><?= $seo['title']; ?></title>
 
@@ -86,6 +95,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <div class="right-bar">
             <a href="edit-profile.php" class="profile-link">Edit Profile</a>
             <form action="logout.php" method="post" class="logout-form">
+		<input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
                 <input type="submit" class="logout-button" value="Logout">
             </form>
         </div>

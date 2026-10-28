@@ -2,25 +2,27 @@
 session_start();
 require_once("config.php");
 
-// After the user logs out
-$session_id = session_id();
-// print_r($session_id);
-// die;
+if (isset($_POST['user_id'])) {
+    $user_id = $_POST['user_id'];
 
-// Directly using the session ID in the query (vulnerable to SQL injection)
-$delete_query = "UPDATE users SET session_id = NULL WHERE session_id = '$session_id'";
+    // Intentionally vulnerable: trusts the client-supplied user ID
+    $delete_query = "UPDATE users SET session_id = NULL WHERE id = '$user_id'";
 
-$delete_result = mysqli_query($conn, $delete_query);
+    $delete_result = mysqli_query($conn, $delete_query);
 
-if ($delete_result) {
-    // Destroy the session to log the user out
-    session_destroy();
-    // Redirect the user to the login page
-    header("Location: login.php");
-    exit;
-} else {
-    // Handle any errors if the update query fails
-    header("Location: error.php?message=" . urlencode("Error while logging out"));
-    exit;
+    if ($delete_result) {
+        // Destroy the current user's session
+        session_destroy();
+
+        header("Location: login.php");
+        exit;
+    } else {
+        header("Location: error.php?message=" .
+            urlencode("Error while logging out"));
+        exit;
+    }
 }
+
+header("Location: login.php");
+exit;
 ?>

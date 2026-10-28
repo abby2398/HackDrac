@@ -91,21 +91,29 @@ while ($row = mysqli_fetch_assoc($geoResult)) {
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C70Y2LNZ2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9C70Y2LNZ2');
+</script>
 <meta charset="UTF-8">
 <title>Hackdrac SOC Dashboard</title>
-<link rel="stylesheet" href="css/admin.css">
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/admin.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@4.2.0/build/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script></head>
 
 <body>
 
-<h1>🛡 Hackdrac SOC Dashboard</h1>
+<h1>?? Hackdrac SOC Dashboard</h1>
 <hr>
 
-<h2>🚨 Security Monitoring</h2>
+<h2>?? Security Monitoring</h2>
 
 <div class="security-stats">
 <div class="stat-box">
@@ -143,7 +151,7 @@ while ($row = mysqli_fetch_assoc($geoResult)) {
     <button type="submit">Apply Filter</button>
 </form>
 
-<a href="export_logs.php"><button>📁 Export Logs as CSV</button></a>
+<a href="export_logs.php"><button>?? Export Logs as CSV</button></a>
 
 <!-- LOG TABLE -->
 <div class="logs-window">
@@ -172,9 +180,9 @@ while ($row = mysqli_fetch_assoc($geoResult)) {
 <td>
 <?php
 if ($log['suspicious_flag']) {
-    echo "<span style='color:orange;font-weight:bold;'>⚠️ Suspicious</span>";
+    echo "<span style='color:orange;font-weight:bold;'>?? Suspicious</span>";
 } else {
-    echo "<span style='color:#00ff99;'>✔ Normal</span>";
+    echo "<span style='color:#00ff99;'>? Normal</span>";
 }
 ?>
 </td>
@@ -187,7 +195,7 @@ if ($log['suspicious_flag']) {
 
 <hr>
 
-<h2>📈 Live Traffic (Last 24h)</h2>
+<h2>?? Live Traffic (Last 24h)</h2>
 <div class="chart-container">
 <canvas id="attackChart"></canvas>
 </div>
@@ -209,7 +217,7 @@ new Chart(document.getElementById('attackChart'), {
 });
 </script>
 
-<h2>🌍 Global Attack Distribution</h2>
+<h2>?? Global Attack Distribution</h2>
 <div class="chart-container" style="height:600px;">
 <canvas id="geoChart"></canvas>
 </div>

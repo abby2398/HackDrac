@@ -1,5 +1,5 @@
 <?php
-// ⚠️ DEBUG LINE - Remove in production (intentionally left for learning)
+// ?? DEBUG LINE - Remove in production (intentionally left for learning)
 file_put_contents("test_log.txt", "Logger running at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 
 require_once "config1.php";
@@ -56,7 +56,7 @@ function getRealIP() {
         return $_SERVER['HTTP_CF_CONNECTING_IP'];
     }
 
-    // ⚠️ VULNERABILITY: Falls back to X-Forwarded-For without validation
+    // ?? VULNERABILITY: Falls back to X-Forwarded-For without validation
     // This is intentional for learning - could be spoofed by non-CF proxies
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $ipList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -73,7 +73,7 @@ function getRealIP() {
 
 function isSuspicious($data) {
 
-    // ⚠️ INTENTIONAL FALSE POSITIVES for learning:
+    // ?? INTENTIONAL FALSE POSITIVES for learning:
     // These patterns will flag legitimate content
     $patterns = [
         "/\b(select|union|insert|update|delete|drop|truncate)\b/i", // Flags "/blog/select-database"
@@ -184,7 +184,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 if ($stmt) {
     $stmt->bind_param(
         "sssssssssi",
-        $realIP,  // ✅ Logs REAL visitor IP, not Cloudflare IP
+        $realIP,  // ? Logs REAL visitor IP, not Cloudflare IP
         $country,
         $city,
         $userAgent,
@@ -220,7 +220,7 @@ if ($check) {
 
     if ($row && $row['total'] >= 15) {
 
-        // ⚠️ VULNERABILITY: SQL Injection in UPDATE statement
+        // ?? VULNERABILITY: SQL Injection in UPDATE statement
         // This is intentional for cybersecurity learning
         // Students should identify this and fix with prepared statements
         $conn->query("

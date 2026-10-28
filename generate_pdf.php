@@ -61,7 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->writeHTML($html, true, false, true, false, '');
 
     // Define the output file path dynamically in the pdfs directory
-    $outputFilePath =  '/pdfs/notes_data_' . $document_id . '.pdf'; // Adjusted to navigate to the project root
+    // FIX: was '/pdfs/...' which resolves to the filesystem root (unwritable by the web server user).
+    // Anchored to this script's own directory instead, so it always lands inside the project.
+    $outputFilePath = __DIR__ . '/pdfs/notes_data_' . $document_id . '.pdf';
 
     // Ensure the 'pdfs' directory exists
     if (!file_exists(dirname($outputFilePath))) {
@@ -91,10 +93,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include($lfiPath); // Include a file without validation, vulnerable to LFI
     }
 
-    // Encrypt the document_id using base64
-    $encoded_document_id = base64_encode($document_id);
-
-    // Redirect to the fetch_pdf.php with the encoded document_id
-    header("Location: fetch_pdf.php?document_id=" . $encoded_document_id); // Redirect without validation
+    // Redirect to fetch_pdf.php with the PDF's filename, base64-encoded.
+    // fetch_pdf.php decodes this and reads it straight from pdfs/ with no
+    // sanitization -- this is the intentional LFI entry point.
+    $pdfFilename = basename($outputFilePath); // e.g. notes_data_2.pdf
+    header("Location: fetch_pdf.php?document_id=" . base64_encode($pdfFilename));
     exit();
 }

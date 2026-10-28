@@ -57,6 +57,15 @@ $userResult = mysqli_query($conn, $userQuery);
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C70Y2LNZ2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9C70Y2LNZ2');
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard Page</title>
@@ -82,7 +91,9 @@ $userResult = mysqli_query($conn, $userQuery);
                 <form action="../logout.php" method="post" class="logout-form">
                 <input type="submit" class="logout-button" value="Logout">
                 </form>
-                <a href="SOC_admin_Dashboard.php" class="profile-link">SOC</a>
+
+                <a href="dashboard.php" class="profile-link">SOC</a>
+           
             </div>
         </div>
     <div> 

@@ -1,1 +1,58 @@
-php_value auto_prepend_file "D:\xampp\htdocs/logger.php"
+# ----------------------------------
+# Enable rewrite
+# ----------------------------------
+RewriteEngine On
+
+# ----------------------------------
+# Force HTTPS
+# ----------------------------------
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ----------------------------------
+# Canonical domain (remove www)
+# ----------------------------------
+RewriteCond %{HTTP_HOST} !^hackdrac\.abbytes\.in$ [NC]
+RewriteRule ^ https://hackdrac.abbytes.in%{REQUEST_URI} [L,R=301]
+# ----------------------------------
+# Run logger for EVERY request
+# ----------------------------------
+php_value auto_prepend_file "/var/www/html/logger.php"
+
+# ----------------------------------
+# Custom 404 handler (logs non-existing files)
+# ----------------------------------
+ErrorDocument 404 /404.php
+
+# ----------------------------------
+# Sitemap rule
+# ----------------------------------
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# ----------------------------------
+# Pretty URLs ? .php
+# /about ? about.php
+# ----------------------------------
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# ----------------------------------
+# Security hardening
+# ----------------------------------
+<FilesMatch "(^\.|config\.php|backdoor\.txt)">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes
+
+# Block sensitive files
+<FilesMatch "(backdoor\.txt|backup\.sql|mostSensitiveData\.txt)">
+    Require all denied
+</FilesMatch>
+
+# Block sensitive directories
+RedirectMatch 403 ^/library/TCPDF/examples/
+RedirectMatch 403 ^/db/
+
+# Compression
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
